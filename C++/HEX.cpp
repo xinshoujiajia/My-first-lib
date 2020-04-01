@@ -4,28 +4,36 @@
 using namespace std;
 int main()
 {
-    int a,b;
-    string x,y;
+    int a,b,temp;
+    int y=0;
+    string x;
     cout<<"输入初始进制:";
     cin>>a;
-    cout<<"输入目标进制:";
-    cin>>b;
     cout<<"输入"<<a<<"进制数:";
     cin>>x;
     for(int i=0;i<x.length();i++)
     {
-        if(x[i]>47)
+        if(int(x[i])>47)
         {
-            if(x[i]<58)
+            if(int(x[i])<58)
             {
-                
-            }else if(x[i]>64)
+                temp=(int(x[i])-48);
+                if(temp<a)
+                    y=y+temp*pow(a,x.length()-1-i);
+                else goto exit;
+            }else if(int(x[i])>96&&int(x[i])<123)
             {
-
+                temp=(int(x[i])-87);
+                if(temp<a)
+                    y=y+temp*pow(a,x.length()-1-i);
+                else goto exit;                
             }
         }
-        y=x[i];
-        cout<<x;
     }
+    exit:
+    if(temp<a)
+        cout<<y<<endl;
+    else
+        cout<<"请输入正确的数"<<endl;
     return 0;
 }
